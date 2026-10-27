@@ -775,6 +775,12 @@ html.app-ui .flash .fback{background:color-mix(in srgb,var(--ac) 7%,var(--surfac
 .gearbtn{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--sunk)}
 .gearbtn svg{width:18px;height:18px}
 
+/* bỏ thanh trên cùng ở kiểu app */
+html.app-ui .topbar{display:none}
+html.app-ui .content{padding-top:max(18px, env(safe-area-inset-top, 0px))}
+.inback{display:inline-flex;align-items:center;gap:2px;color:var(--inv);font-size:16px;font-weight:500;padding:4px 8px 4px 0;margin:0 0 -16px -6px;align-self:flex-start}
+.inback svg{width:22px;height:22px;stroke-width:2.4}
+
 </style>
 </head>
 <body>
@@ -7824,23 +7830,20 @@ function renderTabbar() {
   tb.innerHTML = TABS.map(([k, n, i]) => { const b = k === "home" ? navBadge("home") : k === "vocab" ? navBadge("notebook") : ""; return `<button class="${cur === k ? "on" : ""}" data-nav="${k}"><span class="ti">${ic(i)}${b ? `<i>${b}</i>` : ""}</span><span>${n}</span></button>`; }).join("");
 }
 
-/* ---------- thanh điều hướng trên cùng ---------- */
+/* ---------- không có thanh trên cùng: nút quay lại nằm ngay đầu trang ---------- */
 const _renderTop = renderTop;
-renderTop = function () {
-  if (!appUI()) return _renderTop();
-  const bk = backTarget(), days = U.examDate ? dayDiff(todayKey(), U.examDate) : null;
-  $("#topbar").innerHTML = `<div class="nb-l">${bk ? `<button class="nb-back" id="nbBack">${ic("left")}<span>${esc(bk.t)}</span></button>` : ""}</div>
-    <div class="nb-t">${esc(VIEW_TITLE[R.view] || "")}</div>
-    <div class="nb-r"><button class="nb-ic" data-nav="home" title="Chuỗi ngày học">${ic("flame")}<b>${streak()}</b></button><button class="nb-ic" data-nav="settings" title="Ngày thi">${ic("cal")}${days != null && days >= 0 ? `<b>${days}</b>` : ""}</button></div>`;
-  const b = $("#nbBack"); if (b) b.onclick = () => go(bk.view, bk.sub || null, null);
-  $("#topbar").classList.toggle("always", !document.querySelector("#content .pagehead"));
-};
+renderTop = function () { if (!appUI()) return _renderTop(); $("#topbar").innerHTML = ""; };
 const _renderMain = renderMain;
 renderMain = function () {
   _renderMain();
-  if (appUI()) { $("#topbar").classList.toggle("always", !$("#content .pagehead")); $("#topbar").classList.remove("scrolled"); renderTabbar(); }
+  if (!appUI()) return;
+  const bk = backTarget(), v = $("#content .view");
+  if (bk && v) {
+    const b = document.createElement("button"); b.className = "inback"; b.innerHTML = `${ic("left")}<span>${esc(bk.t)}</span>`;
+    b.onclick = () => go(bk.view, bk.sub || null, null); v.prepend(b);
+  }
+  renderTabbar();
 };
-document.addEventListener("scroll", e => { if (e.target && e.target.id === "content" && appUI()) $("#topbar").classList.toggle("scrolled", e.target.scrollTop > 46); }, true);
 let rT; addEventListener("resize", () => { clearTimeout(rT); rT = setTimeout(() => { const was = document.documentElement.classList.contains("tabmode"); applyUI(); if (was !== tabMode()) { renderSide(); renderTop(); } }, 150); });
 
 /* ---------- trang “Luyện tập” và “Thêm” (dùng cho thanh tab) ---------- */
