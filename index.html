@@ -5906,7 +5906,6 @@ function renderSide() {
     <div class="brand-t"><b>${esc(U.name)}</b></div>
     <button class="iconbtn" id="collapseBtn" title="Thu gọn">${ic("side")}</button>
   </div>
-  <button class="search" data-nav="dict">${ic("search")}<span>Tra từ nhanh…</span><kbd>/</kbd></button>
   <div class="sidescroll">
     ${NAV.map(([lab, items]) => `<div class="navlabel">${lab}</div><nav class="nav">${items.map(([k, n, i, c, sh]) => {
       const b = navBadge(k);
@@ -7961,15 +7960,30 @@ var GS_URL = "https://script.google.com/macros/s/AKfycbzRQ2b0ukf9PTFKyQoTLubuWVf
    Bài đọc / bài nghe được thêm vào Google Sheet (trang KhoBai) và tải về qua Apps Script.
    Lưu bản sao trên máy để mở nhanh và dùng được khi mất mạng. */
 const KHO_KEY = "banhbao_kho_v1";
-const KHO_TARGET = { reading: () => READING, listening: () => LISTENING };
+/* skill → [mảng đích, khóa nhận diện, kiểm tra hợp lệ] */
+const KHO_TARGET = {
+  reading:   [() => READING,        d => d.id,    d => Array.isArray(d.paras) && Array.isArray(d.groups)],
+  listening: [() => LISTENING,      d => d.id,    d => Array.isArray(d.script) && Array.isArray(d.groups)],
+  writing1:  [() => WRITING.task1,  d => d.id,    d => d.prompt && d.chart],
+  writing2:  [() => WRITING.task2,  d => d.id,    d => d.prompt && d.sample],
+  speaking1: [() => SPEAKING.p1,    d => d.topic, d => Array.isArray(d.qs)],
+  speaking2: [() => SPEAKING.p2,    d => d.id,    d => Array.isArray(d.cue)],
+  vocab:     [() => VOCAB,          d => d.id,    d => Array.isArray(d.words)],
+  grammar:   [() => GRAMMAR,        d => d.id,    d => d.body && Array.isArray(d.ex)]
+};
 function khoMerge(items) {
   let added = 0;
   (items || []).forEach(it => {
-    const arr = KHO_TARGET[it.skill] && KHO_TARGET[it.skill](); const d = it.data;
-    if (!arr || !d || !d.id || !Array.isArray(d.groups)) return;
+    const t = KHO_TARGET[it.skill], d = it.data;
+    if (!t || !d) return;
+    let arr; try { arr = t[0](); } catch (e) { return; }
+    const key = t[1](d);
+    if (!arr || !key || !t[2](d)) return;
     d.fromKho = true;
-    const i = arr.findIndex(x => x.id === d.id);
+    if (it.skill === "writing1") d.task = 1; if (it.skill === "writing2") d.task = 2;
+    const i = arr.findIndex(x => t[1](x) === key);
     if (i >= 0) { if (arr[i].fromKho) arr[i] = d; } else { arr.push(d); added++; }
+    if (it.skill === "vocab" && typeof LOCAL_DICT !== "undefined") d.words.forEach(w => { LOCAL_DICT[w[0].toLowerCase()] = { w: w[0], pos: w[1], mean: w[2], ex: w[3] || "", topic: d.name }; });
   });
   return added;
 }
@@ -7983,7 +7997,7 @@ async function khoSync() {
     try { localStorage.setItem(KHO_KEY, JSON.stringify({ at: Date.now(), items: j.items })); } catch (e) {}
     if (JSON.stringify(j.items) === before) return;
     const added = khoMerge(j.items);
-    if (["reading", "listening", "practice", "home"].includes(R.view) && !R.sub) renderMain();
+    if (["reading", "listening", "writing", "speaking", "vocab", "grammar", "practice", "home", "more"].includes(R.view) && (!R.sub || ["t1", "t2"].includes(R.sub))) renderMain();
     if (added) toast(`Có ${added} bài mới trong kho bài!`, "cheer");
   } catch (e) { /* mất mạng: dùng bản đã lưu */ }
 }
@@ -8201,9 +8215,8 @@ renderSide = function () {
   const cur = TAB_OF[R.view] === "more" || TAB_OF[R.view] === "practice" ? R.view : R.view;
   $("#side").innerHTML = `<div class="iside">
     <div class="ibrand"><span class="logo">${bbMascot("happy")}</span><b>${esc(U.name)}</b><button class="sidetog" data-sidetog="1" title="Thu gọn thanh bên">${ic("side")}</button></div>
-    <button class="isearch" data-nav="dict">${ic("search")}<span>Tra từ</span></button>
     <div class="iscroll">
-    ${NAV.map(([lab, items]) => `<div class="ilabel">${lab}</div>${items.filter(x => x[0] !== "dict").map(([k, n, i, c]) => { const b = navBadge(k); return `<button class="srow ${cur === k || (k === "mock" && cur === "band") ? "on" : ""}" data-nav="${k}">${isq(c, i)}<span>${n}</span>${b ? `<span class="ibadge">${b}</span>` : ""}</button>`; }).join("")}`).join("")}
+    ${NAV.map(([lab, items]) => `<div class="ilabel">${lab}</div>${items.map(([k, n, i, c]) => { const b = navBadge(k); return `<button class="srow ${cur === k || (k === "mock" && cur === "band") ? "on" : ""}" data-nav="${k}">${isq(c, i)}<span>${n}</span>${b ? `<span class="ibadge">${b}</span>` : ""}</button>`; }).join("")}`).join("")}
     <div class="ilabel">Khác</div>
     <button class="srow ${cur === "guide" ? "on" : ""}" data-nav="guide">${isq("L", "help")}<span>Hướng dẫn & đề thi</span></button>
     <button class="srow ${cur === "settings" ? "on" : ""}" data-nav="settings">${isq("N", "gear")}<span>Cài đặt</span></button>
