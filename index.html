@@ -1912,21 +1912,37 @@ const PLAN = {
   }
 };
 const QUOTES = [
-  ["Small steps every day add up to big results.", "Mỗi ngày một bước nhỏ, cộng lại thành kết quả lớn."],
-  ["You don't have to be perfect to make progress.", "Không cần hoàn hảo mới tiến bộ được."],
-  ["Mistakes are proof that you are trying.", "Sai là bằng chứng bạn đang cố gắng."],
-  ["The expert in anything was once a beginner.", "Chuyên gia nào cũng từng là người mới bắt đầu."],
-  ["Slow progress is still progress.", "Tiến chậm vẫn là tiến."],
-  ["Learn a little, review a lot.", "Học ít một, ôn thật nhiều."],
-  ["Today's practice is tomorrow's band score.", "Luyện hôm nay là điểm số ngày mai."],
-  ["Believe you can, and you're halfway there.", "Tin mình làm được là đã đi được nửa đường."],
-  ["Consistency beats intensity.", "Đều đặn quan trọng hơn dồn sức."],
-  ["Every word you learn opens a new door.", "Mỗi từ mới mở ra một cánh cửa."],
-  ["Don't compare your chapter one to someone else's chapter twenty.", "Đừng so chương 1 của mình với chương 20 của người khác."],
-  ["Speak, even if your voice shakes.", "Cứ nói đi, dù giọng còn run."],
-  ["A little bit of English every day keeps the stress away.", "Mỗi ngày một chút tiếng Anh, áp lực tan biến."],
-  ["Rest if you must, but don't quit.", "Mệt thì nghỉ, nhưng đừng bỏ cuộc."],
-  ["Soft like a bun, strong like a champion.", "Mềm như bánh bao, mạnh như nhà vô địch."]
+  ["Life is like a box of chocolates. You never know what you're gonna get.", "Cuộc đời như hộp sô-cô-la, chẳng bao giờ biết mình sẽ nhận được gì.", "Forrest Gump"],
+  ["Just keep swimming.", "Cứ bơi tiếp thôi.", "Finding Nemo"],
+  ["Hakuna matata.", "Đừng lo lắng gì cả.", "The Lion King"],
+  ["To infinity and beyond!", "Tới vô cực và xa hơn nữa!", "Toy Story"],
+  ["May the Force be with you.", "Nguyện Thần Lực ở bên bạn.", "Star Wars"],
+  ["There's no place like home.", "Không đâu bằng nhà mình.", "The Wizard of Oz"],
+  ["After all, tomorrow is another day!", "Dù sao thì ngày mai lại là một ngày khác!", "Gone with the Wind"],
+  ["Ohana means family. Family means nobody gets left behind.", "Ohana nghĩa là gia đình. Gia đình là không ai bị bỏ lại.", "Lilo & Stitch"],
+  ["The past can hurt. But you can either run from it, or learn from it.", "Quá khứ có thể làm ta đau, nhưng ta có thể trốn chạy hoặc học từ nó.", "The Lion King"],
+  ["Anyone can cook.", "Ai cũng có thể nấu ăn.", "Ratatouille"],
+  ["Carpe diem. Seize the day.", "Hãy sống trọn từng ngày.", "Dead Poets Society"],
+  ["It's not our abilities that show what we truly are. It is our choices.", "Không phải khả năng, mà lựa chọn mới cho thấy ta thật sự là ai.", "Harry Potter"],
+  ["Happiness can be found even in the darkest of times, if one only remembers to turn on the light.", "Hạnh phúc có thể tìm thấy cả trong lúc tăm tối nhất, chỉ cần nhớ bật đèn lên.", "Harry Potter"],
+  ["All we have to decide is what to do with the time that is given to us.", "Điều ta cần quyết định là làm gì với khoảng thời gian được trao.", "The Lord of the Rings"],
+  ["Adventure is out there!", "Phiêu lưu đang chờ ở ngoài kia!", "Up"],
+  ["The flower that blooms in adversity is the most rare and beautiful of all.", "Bông hoa nở giữa nghịch cảnh là bông hoa hiếm và đẹp nhất.", "Mulan"],
+  ["You're braver than you believe, and stronger than you seem.", "Bạn dũng cảm hơn bạn nghĩ và mạnh mẽ hơn vẻ ngoài.", "Winnie the Pooh"],
+  ["Even miracles take a little time.", "Ngay cả phép màu cũng cần một chút thời gian.", "Cinderella"],
+  ["Why so serious?", "Sao nghiêm trọng thế?", "The Dark Knight"],
+  ["I'm the king of the world!", "Ta là vua của thế giới!", "Titanic"],
+  ["Keep moving forward.", "Cứ tiến về phía trước.", "Meet the Robinsons"],
+  ["Remember who you are.", "Hãy nhớ mình là ai.", "The Lion King"],
+  ["The cold never bothered me anyway.", "Dù sao cái lạnh cũng chẳng làm mình bận tâm.", "Frozen"],
+  ["Some people are worth melting for.", "Có những người đáng để mình tan chảy vì họ.", "Frozen"],
+  ["Yesterday is history, tomorrow is a mystery, but today is a gift.", "Hôm qua là lịch sử, ngày mai là điều bí ẩn, còn hôm nay là món quà.", "Kung Fu Panda"],
+  ["There is no secret ingredient. It's just you.", "Chẳng có nguyên liệu bí mật nào cả. Chỉ là chính bạn thôi.", "Kung Fu Panda"],
+  ["You is kind. You is smart. You is important.", "Em tốt bụng. Em thông minh. Em quan trọng.", "The Help"],
+  ["You've got a friend in me.", "Bạn luôn có mình là bạn.", "Toy Story"],
+  ["Not all those who wander are lost.", "Không phải ai lang thang cũng là kẻ lạc lối.", "The Lord of the Rings"],
+  ["Love is an open door!", "Tình yêu là cánh cửa rộng mở!", "Frozen"],
+  ["I'll be back.", "Tôi sẽ quay lại.", "The Terminator"]
 ];
 
 /* Chiến thuật theo từng dạng câu: [tên dạng, mô tả ngắn, nội dung HTML] */
@@ -6114,7 +6130,7 @@ VIEWS.home = () => {
   <section class="hero">
     <div class="hero-t">
       <div class="eyebrow">${greet()}, ${esc(U.name)}!</div>
-      <p class="hero-q">“${esc(q[0])}”<small>${esc(q[1])}</small></p>
+      <p class="hero-q">“${esc(q[0])}”<small>${esc(q[1])}${q[2] ? ` · <i>${esc(q[2])}</i>` : ""}</small></p>
     </div>
     <div class="scene">${heroScene()}</div>
   </section>
