@@ -792,6 +792,19 @@ html.side-off .side{display:none!important}
 html.side-off .sidefab{display:grid;place-items:center;position:fixed;z-index:20;top:max(16px, env(safe-area-inset-top, 0px));left:max(14px, env(safe-area-inset-left, 0px));width:40px;height:40px;border-radius:12px;background:var(--surface);color:var(--inv);box-shadow:0 2px 10px rgba(0,0,0,.12);border:.5px solid var(--line2)}
 html.side-off .content{padding-left:max(68px, env(safe-area-inset-left, 0px))}
 
+/* nhập bài đọc */
+.impform{display:flex;flex-direction:column;gap:8px}
+.impform .lbl{font-size:13px;font-weight:600;margin-top:6px}
+.impform .lbl .tiny{font-weight:400}
+.impform code{background:var(--chip);padding:1px 5px;border-radius:5px;font-size:12px}
+.impq{white-space:pre-wrap;font-size:14px;line-height:1.65;max-height:none}
+.impsheet{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;margin-top:8px}
+.impa{display:grid;grid-template-columns:30px minmax(0,1fr);align-items:center;gap:6px;row-gap:2px}
+.impa b{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--chip);font-size:13px}
+.impa .impk{grid-column:2;font-size:12px;min-height:0}
+.impa.ok b{background:var(--good);color:#fff}.impa.ok .impk{color:var(--good)}
+.impa.bad b{background:var(--bad);color:#fff}.impa.bad .impk{color:var(--bad);font-family:var(--mono)}
+
 </style>
 </head>
 <body>
@@ -2089,6 +2102,206 @@ READING.push(
       { q: "In a bilingual brain, both languages stay ___ even when only one is being used.", a: ["active"], ex: "Đoạn C: “both languages remain active”." },
       { q: "Bialystok's 2007 study was carried out at a memory ___ in Toronto.", a: ["clinic"], ex: "Đoạn D: “a memory clinic in Toronto”." },
       { q: "Speaking two languages might help to build a cognitive ___.", a: ["reserve"], ex: "Đoạn D: “a cognitive reserve”." }
+    ]}
+  ]
+}
+);
+
+/* Bài đọc bổ sung (đợt 3) – bài viết mới, chủ đề hay gặp trong IELTS */
+READING.push(
+{
+  id: "r-bees", title: "The Busy World of Honeybees", level: "Band 5.0", topic: "Animals · Nature", minutes: 15,
+  desc: "Đời sống đàn ong và vì sao ong quan trọng với nông nghiệp. TRUE/FALSE/NOT GIVEN, điền từ, trắc nghiệm. 13 câu.",
+  paras: [
+    ["A", "A single honeybee colony can contain more than 50,000 insects, yet it works almost like one living creature. At the centre of the colony is the queen, whose main job is to lay eggs – up to 2,000 a day in summer. Almost all the other bees are female workers. The small number of males, called drones, do not collect food or help with building; their only role is to mate with a queen from another colony."],
+    ["B", "Worker bees change jobs as they grow older. For the first few weeks of their lives, they stay inside the hive. They clean cells, feed young bees, build wax comb and guard the entrance. Only in the last part of their lives, which in summer usually lasts about six weeks in total, do they fly outside to collect nectar and pollen from flowers."],
+    ["C", "When a worker finds a good source of food, she returns to the hive and performs a special movement known as the \"waggle dance\". By moving in a figure-of-eight pattern and shaking her body, she tells other bees in which direction the flowers are and how far away they are. The Austrian scientist Karl von Frisch received a Nobel Prize in 1973 partly for explaining this remarkable form of communication."],
+    ["D", "Nectar is turned into honey inside the hive. Bees add enzymes to it and then fan their wings over the cells to remove water. When the honey is thick enough, they seal each cell with a thin layer of wax. A colony may need to collect nectar from around two million flowers to make just half a kilogram of honey."],
+    ["E", "Bees are important to people for much more than honey. As they move from flower to flower, they carry pollen, which allows plants to produce fruit and seeds. Many crops, including apples, almonds and coffee, depend partly on insects for pollination. In California, for example, beekeepers transport hundreds of thousands of hives to almond farms every spring."],
+    ["F", "In recent years, many beekeepers have reported losing large numbers of colonies. Scientists believe there is no single cause. Instead, a combination of problems, such as certain pesticides, parasites like the varroa mite, poor diet and changes in weather, is making bees weaker. Some cities have responded by planting more wild flowers in parks and along roads, giving bees a wider variety of food."]
+  ],
+  groups: [
+    { type: "tfng", instr: "Do the following statements agree with the information in the passage? Choose <b>TRUE</b>, <b>FALSE</b> or <b>NOT GIVEN</b>.", qs: [
+      { q: "Most of the bees in a colony are male.", a: "FALSE", ex: "Đoạn A: “Almost all the other bees are female workers” → phần lớn là cái." },
+      { q: "Drones help to collect food for the colony.", a: "FALSE", ex: "Đoạn A: drones “do not collect food”." },
+      { q: "Young worker bees spend their first weeks inside the hive.", a: "TRUE", ex: "Đoạn B: “For the first few weeks… they stay inside the hive”." },
+      { q: "Worker bees live longer in winter than in summer.", a: "NOT GIVEN", ex: "Bài chỉ nói tuổi thọ mùa hè khoảng 6 tuần, không so sánh với mùa đông." },
+      { q: "Karl von Frisch was the first person to keep bees in a laboratory.", a: "NOT GIVEN", ex: "Đoạn C chỉ nói ông giải thích điệu nhảy, không nói gì về việc nuôi ong trong phòng thí nghiệm." }
+    ]},
+    { type: "gap", instr: "Complete the sentences. Choose <b>ONE WORD AND/OR A NUMBER</b> from the passage for each answer.", qs: [
+      { q: "In summer, a queen can lay as many as ___ eggs a day.", a: ["2,000", "2000"], ex: "Đoạn A: “up to 2,000 a day in summer”." },
+      { q: "In the waggle dance, the bee moves in a ___ pattern.", a: ["figure-of-eight", "figure of eight"], ex: "Đoạn C: “moving in a figure-of-eight pattern”." },
+      { q: "Bees remove water from nectar by moving their ___ over the cells.", a: ["wings"], ex: "Đoạn D: “fan their wings over the cells to remove water”." },
+      { q: "Full cells of honey are closed with a thin layer of ___.", a: ["wax"], ex: "Đoạn D: “seal each cell with a thin layer of wax”." }
+    ]},
+    { type: "mcq", instr: "Choose the correct letter, <b>A, B, C or D</b>.", qs: [
+      { q: "Why are hives taken to almond farms in California?", opts: ["to produce more honey", "to pollinate the almond trees", "to protect the bees from pesticides", "to test new types of hive"], a: 1, ex: "Đoạn E: ong mang phấn hoa giúp cây ra quả; nông trại hạnh nhân cần ong thụ phấn." },
+      { q: "According to scientists, colony losses are caused by", opts: ["pesticides only", "a new parasite", "several problems together", "colder winters"], a: 2, ex: "Đoạn F: “there is no single cause… a combination of problems”." },
+      { q: "How have some cities tried to help bees?", opts: ["by banning beekeeping", "by planting more wild flowers", "by building hives on roofs", "by reducing traffic"], a: 1, ex: "Đoạn F: “planting more wild flowers in parks and along roads”." },
+      { q: "What is the passage mainly about?", opts: ["how to start keeping bees", "the history of honey", "how bee colonies work and why bees matter", "the dangers of bee stings"], a: 2, ex: "Bài nói về tổ chức đàn ong (A–D) và vai trò, nguy cơ của ong (E–F)." }
+    ]}
+  ]
+},
+{
+  id: "r-whales", title: "Why Do Whales Strand?", level: "Band 5.5", topic: "Animals · Ocean", minutes: 20,
+  desc: "Hiện tượng cá voi, cá heo mắc cạn hàng loạt và các giả thuyết khoa học. Matching Headings, điền từ, TRUE/FALSE/NOT GIVEN. 13 câu.",
+  paras: [
+    ["A", "Every year, people around the world find whales and dolphins lying on beaches, unable to return to the sea. Usually only one animal is involved, and it is often old, sick or injured. Sometimes, however, dozens or even hundreds of animals come ashore together. These events, known as mass strandings, have puzzled people for centuries, and they still are not fully understood."],
+    ["B", "Mass strandings happen more often in some places than others. Certain coasts, such as parts of New Zealand, Tasmania and Cape Cod in the United States, have long, gently sloping beaches and shallow bays. In such places, the water may become shallow so gradually that animals do not realise they are in danger until the tide goes out and they are trapped."],
+    ["C", "Social behaviour also seems to be important. Pilot whales, which are involved in many mass strandings, live in groups with very strong family bonds. If one member of the group, perhaps a leader, swims into shallow water because it is ill or confused, the others may follow it rather than leave it alone. Rescuers have noticed that animals pushed back into the sea sometimes return to the beach to stay close to the rest of the group."],
+    ["D", "Many whales and dolphins find their way using echolocation: they produce clicks and listen to the echoes to build a picture of their surroundings. Some researchers believe that loud human noise, such as military sonar used by navies to find submarines, can disturb this system. Several strandings of beaked whales have taken place soon after naval exercises nearby, although it is often difficult to prove a direct link."],
+    ["E", "Another theory involves the Earth's magnetic field. Some scientists think whales may use it like a map when they travel long distances. Storms on the Sun can change the magnetic field for short periods, and it is possible that this confuses animals and sends them in the wrong direction. This idea is interesting, but there is not yet enough evidence to support it."],
+    ["F", "When a stranding happens, quick action can save lives. Volunteers keep the animals wet and cool, cover their skin to protect it from the sun, and wait for the next high tide to help them float again. In New Zealand, a national charity trains thousands of members of the public to do this work. Even so, not every animal can be rescued, and sometimes the kindest decision is to end the suffering of an animal that is too weak to survive."]
+  ],
+  groups: [
+    { type: "match", instr: "The passage has six paragraphs, <b>A–F</b>. Choose the correct heading for paragraphs <b>B–E</b> from the list of headings below.", options: ["i. A link with man-made sound", "ii. The shape of the coastline", "iii. How whales choose a leader", "iv. A natural mystery", "v. Loyalty to the group", "vi. A possible role for the Sun", "vii. Why whale numbers are falling"], qs: [
+      { q: "Paragraph B", a: 1, ex: "Đoạn B nói về bãi biển thoải, vịnh nông → hình dạng bờ biển (ii)." },
+      { q: "Paragraph C", a: 4, ex: "Đoạn C: cả đàn đi theo con bị bệnh, quay lại bãi để ở gần đàn → sự gắn bó với nhóm (v). Bẫy: (iii) nhắc “leader” nhưng đoạn không nói cách chọn đầu đàn." },
+      { q: "Paragraph D", a: 0, ex: "Đoạn D: tiếng ồn, sonar quân sự → âm thanh do con người tạo ra (i)." },
+      { q: "Paragraph E", a: 5, ex: "Đoạn E: bão Mặt Trời làm thay đổi từ trường (vi)." }
+    ]},
+    { type: "gap", instr: "Complete the notes. Choose <b>NO MORE THAN TWO WORDS</b> from the passage for each answer.", qs: [
+      { q: "Single strandings: the animal is often old, sick or ___.", a: ["injured"], ex: "Đoạn A: “old, sick or injured”." },
+      { q: "Dangerous coasts have gently sloping beaches and shallow ___.", a: ["bays"], ex: "Đoạn B: “shallow bays”." },
+      { q: "Whales and dolphins use clicks and echoes – a system called ___.", a: ["echolocation"], ex: "Đoạn D." },
+      { q: "Navies use ___ to find submarines.", a: ["military sonar", "sonar"], ex: "Đoạn D: “military sonar used by navies to find submarines”." },
+      { q: "Rescuers wait for the next ___ so the animals can float again.", a: ["high tide"], ex: "Đoạn F: “wait for the next high tide”." }
+    ]},
+    { type: "tfng", instr: "Do the following statements agree with the information in the passage? Choose <b>TRUE</b>, <b>FALSE</b> or <b>NOT GIVEN</b>.", qs: [
+      { q: "Scientists now fully understand the causes of mass strandings.", a: "FALSE", ex: "Đoạn A: “they still are not fully understood”." },
+      { q: "Pilot whales are the largest species of dolphin.", a: "NOT GIVEN", ex: "Bài không nói về kích thước của cá voi hoa tiêu." },
+      { q: "A direct connection between sonar and strandings is always easy to show.", a: "FALSE", ex: "Đoạn D: “it is often difficult to prove a direct link”." },
+      { q: "Members of the public in New Zealand can receive training to help stranded animals.", a: "TRUE", ex: "Đoạn F: “a national charity trains thousands of members of the public”." }
+    ]}
+  ]
+},
+{
+  id: "r-container", title: "The Box That Changed the World", level: "Band 6.0", topic: "Business · Transport", minutes: 20,
+  desc: "Container vận chuyển đã thay đổi thương mại và các cảng biển ra sao. TRUE/FALSE/NOT GIVEN, trắc nghiệm, điền tóm tắt. 13 câu.",
+  paras: [
+    ["A", "For most of history, loading a ship was slow, hard and expensive work. Goods arrived at ports in sacks, barrels and wooden boxes of every shape and size, and teams of dock workers carried them onto the ship one by one. A large cargo ship could spend a week or more in port being loaded and unloaded, and goods were often damaged or stolen along the way. In some cases, the cost of handling cargo in port was greater than the cost of the sea journey itself."],
+    ["B", "The solution came from an unlikely person. Malcom McLean was an American trucking businessman, not a sailor. In the 1950s, frustrated by the hours his drivers spent waiting at ports, he developed the idea of lifting whole truck bodies, or containers, straight onto ships without unpacking them. In 1956, his converted ship, the Ideal X, sailed from New Jersey to Texas carrying 58 metal containers."],
+    ["C", "The real breakthrough, however, was standardisation. Containers were only truly efficient if every port, ship, train and truck could handle the same boxes. During the 1960s, international agreements set standard sizes, and the twenty-foot container became the unit used to measure a ship's capacity, known as the TEU (twenty-foot equivalent unit). Once these standards were in place, a container could travel from a factory in one country to a shop in another without its contents ever being touched."],
+    ["D", "The effects were enormous. Loading times fell from days to hours, and the cost of shipping goods dropped dramatically. Theft and damage also became much less common, because containers are locked and sealed. Economists argue that cheap and reliable shipping was one of the main reasons for the rapid growth of world trade in the late twentieth century, making it possible for companies to build products using parts from many different countries."],
+    ["E", "Ports themselves changed completely. Traditional harbours in city centres, with narrow streets and small warehouses, could not deal with huge container ships, which need deep water, giant cranes and large areas of flat land for storage. New container terminals were built further away, and many old docks closed. In cities such as London and New York, former port areas have since been turned into offices, apartments and leisure centres. At the same time, tens of thousands of dock workers lost their jobs, as machines replaced human labour."],
+    ["F", "Today, the largest container ships can carry more than 24,000 TEU. Most new terminals are increasingly automated, with computer-controlled cranes and driverless vehicles moving boxes around the port. However, size brings new risks. When one very large ship became stuck in the Suez Canal for six days in 2021, it blocked one of the world's busiest trade routes and showed how much the global economy depends on this simple metal box."]
+  ],
+  groups: [
+    { type: "tfng", instr: "Do the following statements agree with the information in the passage? Choose <b>TRUE</b>, <b>FALSE</b> or <b>NOT GIVEN</b>.", qs: [
+      { q: "Before containers, port costs could be higher than the cost of the voyage.", a: "TRUE", ex: "Đoạn A: “the cost of handling cargo in port was greater than the cost of the sea journey itself”." },
+      { q: "Malcom McLean had worked as a ship's captain before starting his business.", a: "FALSE", ex: "Đoạn B: “a trucking businessman, not a sailor”." },
+      { q: "The Ideal X was the largest ship in the United States at the time.", a: "NOT GIVEN", ex: "Bài không nói kích thước của Ideal X so với các tàu khác." },
+      { q: "Containers made it harder for thieves to steal goods.", a: "TRUE", ex: "Đoạn D: “Theft… became much less common, because containers are locked and sealed”." }
+    ]},
+    { type: "mcq", instr: "Choose the correct letter, <b>A, B, C or D</b>.", qs: [
+      { q: "According to paragraph C, containers became truly efficient when", opts: ["ships became faster", "the same sizes were used everywhere", "trains replaced trucks", "factories moved closer to ports"], a: 1, ex: "Đoạn C: “The real breakthrough, however, was standardisation”." },
+      { q: "What is a TEU?", opts: ["a type of crane", "a shipping company", "a unit for measuring ship capacity", "an international agreement"], a: 2, ex: "Đoạn C: “the unit used to measure a ship's capacity, known as the TEU”." },
+      { q: "Why did many old city-centre docks close?", opts: ["They were too expensive to rent.", "They lacked the space and deep water modern ships need.", "Governments wanted to build apartments.", "Dock workers went on strike."], a: 1, ex: "Đoạn E: cảng cũ không đáp ứng “deep water, giant cranes and large areas of flat land”." },
+      { q: "The writer mentions the Suez Canal incident to show that", opts: ["canals are too narrow for modern ships", "automation causes accidents", "world trade relies heavily on container shipping", "ships should be made smaller"], a: 2, ex: "Đoạn F: “showed how much the global economy depends on this simple metal box”." }
+    ]},
+    { type: "gap", instr: "Complete the summary. Choose <b>ONE WORD ONLY</b> from the passage for each answer.", qs: [
+      { q: "Containers reduced loading times from days to ___.", a: ["hours"], ex: "Đoạn D." },
+      { q: "Cheap shipping helped companies make products using ___ from many countries.", a: ["parts"], ex: "Đoạn D: “using parts from many different countries”." },
+      { q: "Many dock workers lost their jobs because ___ replaced them.", a: ["machines"], ex: "Đoạn E: “as machines replaced human labour”." },
+      { q: "Modern terminals use computer-controlled cranes and ___ vehicles.", a: ["driverless"], ex: "Đoạn F." },
+      { q: "In 2021 a ship was stuck in the canal for ___ days.", a: ["six", "6"], ex: "Đoạn F: “stuck in the Suez Canal for six days”." }
+    ]}
+  ]
+},
+{
+  id: "r-intern", title: "Learning on the Job", level: "Band 5.5–6.0", topic: "Work · Education", minutes: 20,
+  desc: "Thực tập và học việc: lợi ích, vấn đề “thực tập không lương”. Matching information, YES/NO/NOT GIVEN, trắc nghiệm. 13 câu.",
+  paras: [
+    ["A", "For many university students, the first real experience of work comes through a work placement or internship: a period of weeks or months spent working in an organisation, usually connected to their subject. Some courses, especially in engineering, business and nursing, include a placement as a compulsory part of the degree. Other students arrange internships themselves during their summer holidays."],
+    ["B", "Supporters say placements help students in several ways. Students can put the theory they have learned into practice and discover whether they really enjoy a particular career before committing to it. They also develop so-called soft skills, such as teamwork, time management and communicating with customers, which are difficult to learn in a lecture hall. In my opinion, this practical experience is just as valuable as anything learned from textbooks."],
+    ["C", "There is also evidence that placements improve students' job prospects. Several surveys of graduates in the United Kingdom have found that those who completed a year in industry were more likely to be in professional jobs six months after graduating. Employers often use internships as a kind of long job interview, and many offer permanent positions to their best interns."],
+    ["D", "Employers benefit too. Interns bring fresh ideas and are often confident with new technology. A well-organised placement scheme can help a company find talented young people before its competitors do, and it costs much less than advertising for new staff. Small businesses, however, may struggle to provide proper training, because experienced staff simply do not have the time to supervise a student."],
+    ["E", "Not all internships are positive experiences. In some industries, such as fashion, media and politics, unpaid internships have been common. Critics argue that this is unfair, since only young people whose families can support them are able to work for free, especially in expensive cities. I believe that interns who do real work should always be paid, and in some countries the law now requires this."],
+    ["F", "So what makes a good placement? Research suggests that the most important factor is the quality of supervision. Interns who have a named mentor, receive regular feedback and are given meaningful tasks, rather than simply making coffee or photocopying, report far higher satisfaction. Universities can also help by preparing students before the placement and asking them to reflect on what they learned afterwards."]
+  ],
+  groups: [
+    { type: "match", kind: "Matching information", noList: true, instr: "The passage has six paragraphs, <b>A–F</b>. Which paragraph contains the following information? You may use any letter more than once.", options: ["A", "B", "C", "D", "E", "F"], qs: [
+      { q: "a reason why small companies may find it hard to offer placements", a: 3, ex: "Đoạn D: doanh nghiệp nhỏ “may struggle to provide proper training”." },
+      { q: "examples of subjects where a placement is required", a: 0, ex: "Đoạn A: engineering, business, nursing." },
+      { q: "a description of tasks that interns find unsatisfying", a: 5, ex: "Đoạn F: “simply making coffee or photocopying”." },
+      { q: "a comparison between graduates who did and did not do placements", a: 2, ex: "Đoạn C: người có năm thực tập dễ có việc chuyên môn hơn." },
+      { q: "industries where people often work without pay", a: 4, ex: "Đoạn E: fashion, media, politics." }
+    ]},
+    { type: "tfng", labels: ["YES", "NO", "NOT GIVEN"], instr: "Do the following statements agree with the <b>views of the writer</b>? Choose <b>YES</b>, <b>NO</b> or <b>NOT GIVEN</b>.", qs: [
+      { q: "Practical work experience is less important than academic study.", a: "NO", ex: "Đoạn B: “just as valuable as anything learned from textbooks” → ngang nhau, không kém hơn." },
+      { q: "Interns who do real work should receive payment.", a: "YES", ex: "Đoạn E: “I believe that interns who do real work should always be paid”." },
+      { q: "Internships abroad are more useful than internships at home.", a: "NOT GIVEN", ex: "Tác giả không so sánh thực tập trong nước và nước ngoài." },
+      { q: "Unpaid internships are acceptable in the fashion industry.", a: "NO", ex: "Đoạn E: tác giả cho rằng thực tập không lương là không công bằng." }
+    ]},
+    { type: "mcq", instr: "Choose the correct letter, <b>A, B, C or D</b>.", qs: [
+      { q: "According to the passage, employers sometimes use internships to", opts: ["avoid paying staff", "test possible future employees", "train their managers", "advertise their products"], a: 1, ex: "Đoạn C: “a kind of long job interview”." },
+      { q: "The most important factor in a good placement is", opts: ["the length of the placement", "the salary", "the quality of supervision", "the size of the company"], a: 2, ex: "Đoạn F: “the most important factor is the quality of supervision”." },
+      { q: "How can universities help, according to paragraph F?", opts: ["by paying interns", "by finding placements abroad", "by preparing students and asking them to reflect", "by supervising interns at work"], a: 2, ex: "Đoạn F: “preparing students before… reflect on what they learned afterwards”." },
+      { q: "Which skill is NOT mentioned as a soft skill in paragraph B?", opts: ["teamwork", "time management", "communicating with customers", "computer programming"], a: 3, ex: "Đoạn B chỉ liệt kê teamwork, time management, communicating with customers." }
+    ]}
+  ]
+},
+{
+  id: "r-tourism", title: "When Tourists Become Too Many", level: "Band 6.0–6.5", topic: "Tourism · Society", minutes: 20,
+  desc: "Du lịch quá tải (overtourism) và các giải pháp của thành phố. Matching Headings, chọn 2 đáp án, tóm tắt chọn từ trong hộp. 13 câu.",
+  paras: [
+    ["A", "International tourism has grown remarkably over the past half century. In 1950, around 25 million international trips were recorded; before the pandemic in 2019, the figure was close to 1.5 billion. Cheaper flights, online booking and a growing middle class in Asia have all made travel possible for far more people. For many countries, tourism is now a major source of income and employment."],
+    ["B", "Yet in some of the world's most popular destinations, residents have begun to protest. In Venice, the number of visitors on a busy day can be greater than the city's permanent population. In Barcelona, local people have complained that holiday rentals have pushed up rents and changed the character of whole neighbourhoods. The term \"overtourism\" has been used to describe situations in which visitor numbers seriously reduce the quality of life of residents or damage the experience of visitors themselves."],
+    ["C", "The problem is not simply the total number of tourists, but their concentration. Most visitors want to see the same famous sights, at the same times of year and often at the same times of day. Cruise ships, which can bring several thousand passengers into a small port for just a few hours, are a particular concern, because these visitors crowd the centre but spend relatively little money locally."],
+    ["D", "The natural environment can also suffer. Popular beaches, mountains and coral reefs can be damaged by large numbers of people. In 2018, the Philippine government closed the island of Boracay to tourists for six months to clean up polluted water and repair its infrastructure. Thailand's Maya Bay, made famous by a Hollywood film, was closed for several years to allow its coral and marine life to recover."],
+    ["E", "Cities have tried a range of solutions. Amsterdam has stopped issuing licences for new tourist shops in the historic centre and has limited short-term holiday rentals. Venice introduced a fee for day visitors on its busiest days in 2024. Other destinations are encouraging tourists to visit lesser-known areas or to travel outside the peak season, using marketing campaigns and lower prices."],
+    ["F", "Experts generally agree that the aim should not be to stop tourism, which brings real benefits, but to manage it better. This means collecting accurate data on visitor numbers, involving residents in decisions and making sure that more of the money spent by tourists stays in the local community. As one researcher put it, the question is not how many tourists a place can attract, but how many it can welcome well."]
+  ],
+  groups: [
+    { type: "match", instr: "Choose the correct heading for paragraphs <b>B–E</b> from the list of headings below.", options: ["i. Protecting nature by closing sites", "ii. Local anger in famous cities", "iii. The history of package holidays", "iv. Too many people in the same places", "v. Policies to control and spread visitors", "vi. Why tourism creates jobs", "vii. The rise of eco-tourism"], qs: [
+      { q: "Paragraph B", a: 1, ex: "Đoạn B: người dân Venice, Barcelona phản đối → (ii)." },
+      { q: "Paragraph C", a: 3, ex: "Đoạn C: vấn đề là sự tập trung du khách cùng chỗ, cùng giờ → (iv)." },
+      { q: "Paragraph D", a: 0, ex: "Đoạn D: đóng cửa Boracay, Maya Bay để phục hồi thiên nhiên → (i)." },
+      { q: "Paragraph E", a: 4, ex: "Đoạn E: Amsterdam, Venice và các nơi khác đưa ra chính sách → (v)." }
+    ]},
+    { type: "multi", instr: "Choose <b>TWO</b> letters, <b>A–E</b>.", qs: [
+      { q: "Which TWO reasons for the growth of tourism are mentioned in paragraph A?", opts: ["cheaper flights", "better hotels", "online booking", "longer holidays", "safer travel"], a: [0, 2], ex: "Đoạn A: “Cheaper flights, online booking and a growing middle class”." },
+      { q: "Which TWO problems are caused by cruise ship visitors?", opts: ["They damage coral reefs.", "They crowd the city centre.", "They stay in holiday rentals.", "They spend little money locally.", "They arrive outside the peak season."], a: [1, 3], ex: "Đoạn C: “these visitors crowd the centre but spend relatively little money locally”." }
+    ]},
+    { type: "match", kind: "Summary (chọn từ trong hộp)", instr: "Complete the summary using the list of words, <b>A–I</b>, below.", options: ["A. residents", "B. fee", "C. data", "D. stop", "E. licences", "F. manage", "G. season", "H. money", "I. films"], qs: [
+      { q: "Amsterdam no longer gives ___ for new tourist shops in its old centre.", a: 4, ex: "Đoạn E: “stopped issuing licences for new tourist shops”." },
+      { q: "Venice now charges day visitors a ___ on busy days.", a: 1, ex: "Đoạn E: “a fee for day visitors”." },
+      { q: "Some places encourage tourists to come outside the peak ___.", a: 6, ex: "Đoạn E: “travel outside the peak season”." },
+      { q: "Experts say the goal is to ___ tourism rather than end it.", a: 5, ex: "Đoạn F: “not to stop tourism… but to manage it better”." },
+      { q: "Good management includes involving ___ in decisions.", a: 0, ex: "Đoạn F: “involving residents in decisions”." }
+    ]}
+  ]
+},
+{
+  id: "r-heat", title: "Cooling the Cities", level: "Band 6.5", topic: "Cities · Climate", minutes: 20,
+  desc: "Hiệu ứng đảo nhiệt đô thị và cách các thành phố làm mát. Matching information, trắc nghiệm, điền tóm tắt. 13 câu.",
+  paras: [
+    ["A", "On a hot summer evening, the centre of a large city can be several degrees warmer than the surrounding countryside. This difference, known as the urban heat island effect, was first described in the early nineteenth century by Luke Howard, an amateur scientist who recorded temperatures in and around London. Today, with more than half of the world's population living in urban areas and heatwaves becoming more frequent, the effect has become a serious concern for city planners."],
+    ["B", "Several factors combine to make cities warmer. Dark surfaces such as asphalt roads and roofs absorb a large proportion of the sun's energy during the day and release it slowly at night. Tall buildings trap heat and reduce the wind that might otherwise carry it away. In addition, cars, air-conditioning units and factories all produce waste heat. By contrast, in the countryside, plants and soil hold water, and the evaporation of this water cools the air."],
+    ["C", "The consequences can be severe. High night-time temperatures are particularly dangerous, because the human body has no chance to recover from the heat of the day. Elderly people, young children and those with heart or breathing problems are most at risk. Hotter cities also use more electricity for cooling, which increases costs and, where electricity comes from fossil fuels, adds to the greenhouse gases that cause climate change in the first place."],
+    ["D", "One of the simplest solutions is to change the colour of surfaces. White or specially coated \"cool roofs\" reflect much more sunlight than dark ones and can reduce the temperature of the building beneath them. Several cities, including New York, have run programmes to paint thousands of square metres of roofs white. Some places are also experimenting with lighter-coloured road surfaces, although these can create glare for drivers."],
+    ["E", "Many experts, however, believe that plants offer the greatest benefits. Trees provide shade and cool the air through evaporation, while also absorbing rainwater and providing homes for wildlife. Singapore has become well known for its \"city in a garden\" approach, which includes green roofs, walls covered in plants and large parks. Medellín in Colombia created a network of green corridors along roads and streams, and the city reports that temperatures in these areas have fallen noticeably."],
+    ["F", "Water can help too. Fountains, ponds and rivers cool their surroundings, and some cities have uncovered rivers that had been buried under concrete decades earlier. In Seoul, the restoration of the Cheonggyecheon stream, which involved removing an elevated highway, created a popular public space where temperatures are measurably lower than on nearby streets. Such projects are expensive, but supporters argue that their benefits for health, wildlife and quality of life make them worthwhile."]
+  ],
+  groups: [
+    { type: "match", kind: "Matching information", noList: true, instr: "The passage has six paragraphs, <b>A–F</b>. Which paragraph contains the following information? You may use any letter more than once.", options: ["A", "B", "C", "D", "E", "F"], qs: [
+      { q: "a disadvantage of one cooling method", a: 3, ex: "Đoạn D: mặt đường sáng màu “can create glare for drivers”." },
+      { q: "the name of the person who first identified the effect", a: 0, ex: "Đoạn A: Luke Howard." },
+      { q: "groups of people who are most in danger from heat", a: 2, ex: "Đoạn C: người già, trẻ nhỏ, người bệnh tim/phổi." },
+      { q: "an example of a road being removed to bring back nature", a: 5, ex: "Đoạn F: Seoul gỡ đường cao tốc trên cao để khôi phục suối Cheonggyecheon." }
+    ]},
+    { type: "mcq", instr: "Choose the correct letter, <b>A, B, C or D</b>.", qs: [
+      { q: "Why does the countryside stay cooler than cities?", opts: ["It has fewer people.", "Water evaporates from plants and soil.", "It receives less sunlight.", "It has more wind farms."], a: 1, ex: "Đoạn B: “plants and soil hold water, and the evaporation of this water cools the air”." },
+      { q: "Why are hot nights especially dangerous?", opts: ["People cannot sleep with air-conditioning.", "Electricity is more expensive at night.", "The body cannot recover from daytime heat.", "Hospitals are closed."], a: 2, ex: "Đoạn C: “the human body has no chance to recover from the heat of the day”." },
+      { q: "What does the writer say about air-conditioning in hot cities?", opts: ["It solves the heat problem completely.", "It may make climate change worse.", "It is banned in some cities.", "It is cheaper than planting trees."], a: 1, ex: "Đoạn C: dùng nhiều điện từ nhiên liệu hóa thạch “adds to the greenhouse gases”." },
+      { q: "According to many experts, the most effective solution is", opts: ["cool roofs", "lighter roads", "plants and trees", "fountains"], a: 2, ex: "Đoạn E: “plants offer the greatest benefits”." }
+    ]},
+    { type: "gap", instr: "Complete the summary. Choose <b>ONE WORD ONLY</b> from the passage for each answer.", qs: [
+      { q: "Dark roofs and roads absorb the sun's energy and release it slowly at ___.", a: ["night"], ex: "Đoạn B." },
+      { q: "Tall buildings trap heat and reduce the ___.", a: ["wind"], ex: "Đoạn B: “reduce the wind that might otherwise carry it away”." },
+      { q: "Cool roofs ___ much more sunlight than dark roofs.", a: ["reflect"], ex: "Đoạn D." },
+      { q: "Besides cooling the air, trees absorb rainwater and provide homes for ___.", a: ["wildlife"], ex: "Đoạn E." },
+      { q: "Restoration projects are ___, but supporters believe they are worth it.", a: ["expensive"], ex: "Đoạn F: “Such projects are expensive”." }
     ]}
   ]
 }
@@ -6703,6 +6916,127 @@ VIEWS.speaking_mount = () => {
   }
 };
 
+/* ================== NHẬP BÀI ĐỌC ==================
+   Người học tự dán đoạn văn + câu hỏi + đáp án (từ sách, trang luyện đề…) để làm ngay trong web.
+   Bài nhập chỉ lưu trên máy người học (U.imported). */
+U.imported = U.imported || [];
+const impFind = id => (U.imported || []).find(x => x.id === id);
+const IMP_ALIAS = { T: "TRUE", F: "FALSE", NG: "NOT GIVEN", Y: "YES", N: "NO", "NOTGIVEN": "NOT GIVEN" };
+const impNorm = s => { let v = String(s || "").toUpperCase().replace(/[’']/g, "'").replace(/[.,;:!?"“”]/g, " ").replace(/\s+/g, " ").trim(); return IMP_ALIAS[v.replace(/ /g, "")] || IMP_ALIAS[v] || v; };
+/* "1. TRUE" · "2) B" · "3 river / rivers" · "4-5 B, D" (bỏ qua dòng trống) */
+function impParseKey(txt) {
+  const out = [];
+  String(txt || "").split(/\n/).forEach(line => {
+    const m = line.trim().match(/^(?:q(?:uestion)?\s*)?(\d{1,2})\s*(?:[-–]\s*(\d{1,2}))?\s*[.):\-–]?\s+(.+)$/i);
+    if (!m) return;
+    const a = +m[1], b = m[2] ? +m[2] : a, ans = m[3].trim();
+    if (b > a) { const parts = ans.split(/[,&]|\band\b/i).map(s => s.trim()).filter(Boolean); for (let n = a; n <= b; n++) out.push({ n, ans: [parts[n - a] || parts[0]] }); }
+    else out.push({ n: a, ans: ans.split(/\s*\/\s*|\s+OR\s+/i).map(s => s.trim()).filter(Boolean) });
+  });
+  return out.sort((x, y) => x.n - y.n);
+}
+function impParas(txt) {
+  return String(txt || "").replace(/\r/g, "").split(/\n\s*\n/).map(p => p.trim()).filter(Boolean).map(p => {
+    const m = p.match(/^([A-Z])[\s.)]\s*([\s\S]+)$/);
+    return m && m[2].length > 40 ? [m[1], m[2]] : ["", p];
+  });
+}
+
+function importForm(ed) {
+  const e = ed || {};
+  return `<div class="row"><button class="back" data-nav="reading">${ic("left")} Tất cả bài đọc</button></div>
+  ${pageHead("R", "plus", ed ? "Sửa bài đã nhập" : "Nhập bài đọc của bạn", "Dán một bài đọc từ sách hay trang luyện đề để làm ngay trong web: có bấm giờ, chấm điểm, tra từ và lưu sổ từ. Bài chỉ lưu trên máy này.")}
+  <div class="card c-R impform">
+    <label class="lbl">Tên bài</label><input class="inp" id="impT" placeholder="VD: Mass Stranding of Whales" value="${esc(e.title || "")}">
+    <label class="lbl">Đoạn văn <span class="tiny">– mỗi đoạn cách nhau một dòng trống; đoạn bắt đầu bằng “A ”, “B ”… sẽ tự hiện chữ cái</span></label>
+    <textarea class="inp en" id="impP" rows="10" placeholder="Dán toàn bộ bài đọc vào đây…">${esc(e.passage || "")}</textarea>
+    <label class="lbl">Câu hỏi <span class="tiny">– dán nguyên văn, giữ số câu (1, 2, 3…)</span></label>
+    <textarea class="inp en" id="impQ" rows="8" placeholder="Questions 1–5&#10;Do the following statements agree with…&#10;1. …">${esc(e.qtext || "")}</textarea>
+    <label class="lbl">Đáp án <span class="tiny">– mỗi dòng một câu: <code>1 TRUE</code>, <code>2 B</code>, <code>3 river / rivers</code>, <code>4-5 B, D</code>. Viết tắt T, F, NG, Y, N cũng được.</span></label>
+    <textarea class="inp en" id="impK" rows="6" placeholder="1 TRUE&#10;2 NOT GIVEN&#10;3 C&#10;4 harbour">${esc(e.keytext || "")}</textarea>
+    <div class="row" style="gap:10px;flex-wrap:wrap"><label class="lbl" style="margin:0">Thời gian</label><select class="inp" id="impM" style="width:auto">${[15, 20, 25, 30, 60].map(m => `<option ${(e.minutes || 20) === m ? "selected" : ""}>${m}</option>`).join("")}</select><span class="tiny">phút</span>
+      <span class="spacer"></span><span class="tiny" id="impInfo"></span><button class="btn pri" id="impSave">${ic("check")} ${ed ? "Lưu thay đổi" : "Lưu & làm bài"}</button></div>
+  </div>`;
+}
+function importTest(p) {
+  const res = (U.results.reading || {})[p.id];
+  return `<div class="row"><button class="back" data-nav="reading">${ic("left")} Tất cả bài đọc</button><span class="spacer"></span><button class="btn sm" data-impedit="${p.id}">${ic("edit")} Sửa</button><button class="btn sm" data-impdel="${p.id}" style="color:var(--bad)">${ic("trash")} Xóa</button></div>
+  <div class="split c-R" id="rtest">
+    <article class="passage en" id="psg"><h2>${esc(p.title)}</h2><div class="sub">Bài bạn tự nhập · ${p.key.length} câu</div>
+      ${impParas(p.passage).map(([l, t]) => `<p>${l ? `<b class="pl">${l}</b>` : ""}${esc(t)}</p>`).join("")}</article>
+    <div class="qpanel">
+      ${p.qtext ? `<div class="card en impq">${esc(p.qtext)}</div>` : ""}
+      <div class="card"><h4>${ic("edit")} Phiếu trả lời</h4><div class="impsheet">${p.key.map(k => `<label class="impa" data-n="${k.n}"><b>${k.n}</b><input class="inp en" data-impn="${k.n}" autocomplete="off" autocapitalize="off" spellcheck="false"><span class="impk"></span></label>`).join("")}</div></div>
+      <div id="rres"></div>
+      ${res ? `<p class="tiny">Lần trước: ${res.score}/${res.total}</p>` : ""}
+      <div class="stickybar"><span class="tag">${ic("timer")} <span class="timerchip" id="rtime"></span></span><span class="spacer"></span><button class="btn" id="rreset">${ic("refresh")} Làm lại</button><button class="btn pri" id="rsub">${ic("check")} Nộp bài</button></div>
+    </div></div>`;
+}
+
+const _rView = VIEWS.reading;
+VIEWS.reading = () => {
+  if (R.sub === "import") return importForm(R.arg ? impFind(R.arg) : null);
+  if (R.sub && R.sub.startsWith("imp-")) { const p = impFind(R.sub); return p ? importTest(p) : `<div class="empty">Bài này đã bị xóa.</div>`; }
+  let h = _rView();
+  if (R.sub) return h;
+  const mine = U.imported = U.imported || [];
+  const sec = `<section><div class="sec-h c-R">${ic("plus")}<span>Bài bạn tự nhập</span><span class="spacer"></span><button class="btn sm pri" data-nav="reading" data-sub="import">${ic("plus")} Nhập bài mới</button></div>
+    ${mine.length ? `<div class="grid-cards">${mine.map(p => { const r = (U.results.reading || {})[p.id]; return `<button class="tile c-R" data-nav="reading" data-sub="${p.id}"><div class="pic">${ic("edit")}<span class="tag">Tự nhập</span></div><div class="b"><h4>${esc(p.title)}</h4><p>${esc(p.passage.slice(0, 110))}…</p><div class="foot"><span>${p.key.length} câu · ${p.minutes} phút</span>${r ? `<span class="score">${r.score}/${r.total}</span>` : "<span>Chưa làm</span>"}</div></div></button>`; }).join("")}</div>`
+      : `<p class="k">Đang luyện đề ở sách hay trang khác? Dán bài đọc, câu hỏi và đáp án vào đây để làm có bấm giờ, chấm điểm, tra từ và lưu từ mới vào sổ.</p>`}</section>`;
+  return h.replace('<div class="grid-cards">', sec + '<div class="sec-h c-R">' + ic("book") + '<span>Bài đọc có sẵn</span></div><div class="grid-cards">');
+};
+const _rMount = VIEWS.reading_mount;
+VIEWS.reading_mount = () => {
+  if (R.sub === "import") {
+    clearTimers();
+    const info = () => { const k = impParseKey($("#impK").value); $("#impInfo").textContent = k.length ? `Nhận được ${k.length} đáp án (câu ${k[0].n}–${k[k.length - 1].n})` : ""; };
+    $("#impK").addEventListener("input", info); info();
+    $("#impSave").onclick = () => {
+      const title = $("#impT").value.trim() || "Bài đọc tự nhập", passage = $("#impP").value.trim(), qtext = $("#impQ").value.trim(), keytext = $("#impK").value.trim();
+      const key = impParseKey(keytext);
+      if (passage.length < 80) return toast("Dán đoạn văn vào trước nha", "think");
+      if (!key.length) return toast("Chưa đọc được đáp án. Mỗi dòng ghi số câu rồi đáp án, ví dụ: 1 TRUE", "think");
+      const old = R.arg && impFind(R.arg);
+      const p = old || { id: "imp-" + Date.now().toString(36), at: Date.now() };
+      Object.assign(p, { title, passage, qtext, keytext, key, minutes: +$("#impM").value });
+      if (!old) (U.imported = U.imported || []).unshift(p);
+      save(); toast(old ? "Đã lưu thay đổi" : "Đã lưu bài! Bắt đầu làm nhé.", "cheer"); go("reading", p.id);
+    };
+    return;
+  }
+  if (R.sub && R.sub.startsWith("imp-")) {
+    clearTimers();
+    const p = impFind(R.sub); if (!p) return;
+    stopTimers.push(startCountdown(p.minutes, $("#rtime"), () => toast("Hết giờ rồi! Nộp bài thôi.", "wow")));
+    $("#rsub").onclick = () => {
+      clearTimers(); let score = 0;
+      p.key.forEach(k => {
+        const box = $(`.impa[data-n="${k.n}"]`), v = impNorm(box.querySelector("input").value);
+        const ok = v && k.ans.some(a => impNorm(a) === v || impNorm(a).replace(/ /g, "") === v.replace(/ /g, ""));
+        if (ok) score++;
+        box.classList.toggle("ok", !!ok); box.classList.toggle("bad", !ok);
+        box.querySelector(".impk").textContent = ok ? "✓" : "→ " + k.ans.join(" / ");
+      });
+      const total = p.key.length, band = rawToBand("reading", score, total);
+      U.results.reading = U.results.reading || {};
+      U.results.reading[p.id] = { score, total, band, at: Date.now() };
+      markActive(); save();
+      $("#rres").innerHTML = resultHTML("R", score, total, band);
+      $("#rres").scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+    $("#rreset").onclick = () => renderMain();
+    return;
+  }
+  _rMount();
+};
+document.addEventListener("click", e => {
+  const ed = e.target.closest("[data-impedit]"); if (ed) { go("reading", "import", ed.dataset.impedit); return; }
+  const d = e.target.closest("[data-impdel]"); if (!d) return;
+  const p = impFind(d.dataset.impdel); if (!p) return;
+  modal(`<h3>Xóa bài “${esc(p.title)}”?</h3><p class="k">Bài và điểm của bài này sẽ bị xóa khỏi máy.</p><div class="row"><span class="spacer"></span><button class="btn" data-close>Thôi</button><button class="btn pri" id="impDelOk" style="background:var(--bad)">${ic("trash")} Xóa</button></div>`,
+    (bx, close) => { bx.querySelector("#impDelOk").onclick = () => { U.imported = (U.imported || []).filter(x => x.id !== p.id); if (U.results.reading) delete U.results.reading[p.id]; save(); close(); toast("Đã xóa bài", "happy"); go("reading"); }; });
+});
+
 /* ================== TỪ VỰNG · NGỮ PHÁP · TRA TỪ · SỔ TỪ · BAND ================== */
 
 /* ---------- sổ từ: lặp lại ngắt quãng (Leitner) ---------- */
@@ -7622,6 +7956,38 @@ examOpen = function () { if (U.exam && U.exam.sec === "done") { _examOpen(); exR
 
 /* Địa chỉ Apps Script nhận bài (bản web public). Để trống = tắt gửi bài. */
 var GS_URL = "https://script.google.com/macros/s/AKfycbzRQ2b0ukf9PTFKyQoTLubuWVfKQooybGEJeaIBrWcFILa_NdLdeMGqHX8NhVGiKPpYeA/exec";
+
+/* ================== KHO BÀI TRÊN DRIVE ==================
+   Bài đọc / bài nghe được thêm vào Google Sheet (trang KhoBai) và tải về qua Apps Script.
+   Lưu bản sao trên máy để mở nhanh và dùng được khi mất mạng. */
+const KHO_KEY = "banhbao_kho_v1";
+const KHO_TARGET = { reading: () => READING, listening: () => LISTENING };
+function khoMerge(items) {
+  let added = 0;
+  (items || []).forEach(it => {
+    const arr = KHO_TARGET[it.skill] && KHO_TARGET[it.skill](); const d = it.data;
+    if (!arr || !d || !d.id || !Array.isArray(d.groups)) return;
+    d.fromKho = true;
+    const i = arr.findIndex(x => x.id === d.id);
+    if (i >= 0) { if (arr[i].fromKho) arr[i] = d; } else { arr.push(d); added++; }
+  });
+  return added;
+}
+try { const c = JSON.parse(localStorage.getItem(KHO_KEY) || "null"); if (c && c.items) khoMerge(c.items); } catch (e) {}
+async function khoSync() {
+  if (!GS_URL || (window.claude && window.claude.use)) return;
+  try {
+    const j = await fetch(GS_URL + "?content=1").then(r => r.json());
+    if (!j || !j.ok) return;
+    const before = JSON.stringify((JSON.parse(localStorage.getItem(KHO_KEY) || "{}").items) || []);
+    try { localStorage.setItem(KHO_KEY, JSON.stringify({ at: Date.now(), items: j.items })); } catch (e) {}
+    if (JSON.stringify(j.items) === before) return;
+    const added = khoMerge(j.items);
+    if (["reading", "listening", "practice", "home"].includes(R.view) && !R.sub) renderMain();
+    if (added) toast(`Có ${added} bài mới trong kho bài!`, "cheer");
+  } catch (e) { /* mất mạng: dùng bản đã lưu */ }
+}
+setTimeout(khoSync, 800);
 
 /* ================== HỘP CHẤM BÀI ==================
    Bài Writing được gửi vào kho chung của trang (collection "subs").
