@@ -805,6 +805,20 @@ html.side-off .content{padding-left:max(68px, env(safe-area-inset-left, 0px))}
 .impa.ok b{background:var(--good);color:#fff}.impa.ok .impk{color:var(--good)}
 .impa.bad b{background:var(--bad);color:#fff}.impa.bad .impk{color:var(--bad);font-family:var(--mono)}
 
+/* thanh bên vừa khít chiều cao màn hình, không cần cuộn */
+.iside{padding:clamp(8px,1.6vh,14px) 12px clamp(8px,1.4vh,12px)}
+.ibrand{padding:clamp(2px,.6vh,6px) 8px clamp(4px,1.2vh,12px)}
+.ibrand .logo,.ibrand .logo svg{width:clamp(32px,4.6vh,40px);height:clamp(32px,4.6vh,40px)}
+.ibrand b{font-size:clamp(22px,3.2vh,28px)}
+html.app-ui .ilabel{padding:clamp(4px,1.1vh,14px) 12px clamp(2px,.5vh,6px);font-size:12px}
+html.app-ui .srow{min-height:clamp(30px,4.3vh,40px);padding:clamp(2px,.5vh,6px) 10px;font-size:clamp(14.5px,1.9vh,15.5px)}
+.srow .isq{width:clamp(24px,3.4vh,30px);height:clamp(24px,3.4vh,30px)}
+.srow .isq svg{width:clamp(14px,2vh,17px);height:clamp(14px,2vh,17px)}
+.iseg{margin-top:clamp(4px,.8vh,8px)}
+.iseg button{padding:clamp(4px,.8vh,7px) 10px}
+.iscroll{scrollbar-width:none}
+.iscroll::-webkit-scrollbar{display:none}
+
 </style>
 </head>
 <body>
@@ -5861,9 +5875,8 @@ document.addEventListener("click", e => { const b = e.target.closest("[data-say]
 
 /* ---------- điều hướng ---------- */
 const NAV = [
-  ["Học", [
-    ["home", "Tổng quan", "home", "D", "Tổng quan"],
-    ["plan", "Lộ trình 12 tuần", "map", "P", "Lộ trình"]
+  ["", [
+    ["home", "Tổng quan", "home", "D", "Tổng quan"]
   ]],
   ["4 kỹ năng", [
     ["listening", "Listening", "head", "L", "Nghe"],
@@ -5907,7 +5920,7 @@ function renderSide() {
     <button class="iconbtn" id="collapseBtn" title="Thu gọn">${ic("side")}</button>
   </div>
   <div class="sidescroll">
-    ${NAV.map(([lab, items]) => `<div class="navlabel">${lab}</div><nav class="nav">${items.map(([k, n, i, c, sh]) => {
+    ${NAV.map(([lab, items]) => `${lab ? `<div class="navlabel">${lab}</div>` : ""}<nav class="nav">${items.map(([k, n, i, c, sh]) => {
       const b = navBadge(k);
       return `<button class="navi c-${c} ${R.view === k ? "on" : ""}" style="--nc:var(--ac)" data-nav="${k}" title="${n}">${ic(i)}<span>${n}</span><small class="short">${sh}</small>${b ? `<span class="badge">${b}</span>` : ""}</button>`;
     }).join("")}</nav>`).join("")}
@@ -6154,10 +6167,6 @@ VIEWS.home = () => {
           <div>${esc(wod.x[2])}</div>
           <div class="k" style="font-family:var(--read);font-style:italic">${esc(wod.x[3])}</div>
         </div>
-      </section>
-      <section>
-        <div class="sec-h c-D">${ic("map")}<span>Tuần ${w}: ${esc(wk.focus)}</span><span class="spacer"></span><span class="lnk" data-nav="plan">Xem lộ trình</span></div>
-        <div class="card"><div class="bar"><b style="width:${weekProgress(w)}%"></b></div><span class="tiny">${weekProgress(w)}% mục tiêu tuần đã hoàn thành</span></div>
       </section>
     </aside>
   </div>`;
@@ -8216,7 +8225,7 @@ renderSide = function () {
   $("#side").innerHTML = `<div class="iside">
     <div class="ibrand"><span class="logo">${bbMascot("happy")}</span><b>${esc(U.name)}</b><button class="sidetog" data-sidetog="1" title="Thu gọn thanh bên">${ic("side")}</button></div>
     <div class="iscroll">
-    ${NAV.map(([lab, items]) => `<div class="ilabel">${lab}</div>${items.map(([k, n, i, c]) => { const b = navBadge(k); return `<button class="srow ${cur === k || (k === "mock" && cur === "band") ? "on" : ""}" data-nav="${k}">${isq(c, i)}<span>${n}</span>${b ? `<span class="ibadge">${b}</span>` : ""}</button>`; }).join("")}`).join("")}
+    ${NAV.map(([lab, items]) => `${lab ? `<div class="ilabel">${lab}</div>` : ""}${items.map(([k, n, i, c]) => { const b = navBadge(k); return `<button class="srow ${cur === k || (k === "mock" && cur === "band") ? "on" : ""}" data-nav="${k}">${isq(c, i)}<span>${n}</span>${b ? `<span class="ibadge">${b}</span>` : ""}</button>`; }).join("")}`).join("")}
     <div class="ilabel">Khác</div>
     <button class="srow ${cur === "guide" ? "on" : ""}" data-nav="guide">${isq("L", "help")}<span>Hướng dẫn & đề thi</span></button>
     <button class="srow ${cur === "settings" ? "on" : ""}" data-nav="settings">${isq("N", "gear")}<span>Cài đặt</span></button>
@@ -8261,8 +8270,7 @@ VIEWS.practice = () => {
     irow('data-nav="grammar"', "G", "abc", "Ngữ pháp", `${GRAMMAR.length} bài · đã làm ${Object.keys(U.grammar).length}`),
     irow('data-nav="listening" data-sub="dictation"', "P", "edit", "Chép chính tả", `${DICTATION.length} câu, 10 phút mỗi ngày`)])}`;
 };
-VIEWS.more = () => `${pageHead("D", "list", "Thêm", "Lộ trình, công cụ và cài đặt.")}
-  ${ilist("Học", [irow('data-nav="plan"', "P", "map", "Lộ trình 12 tuần", `Đang ở tuần ${weekNo()}/12 · ${weekProgress(weekNo())}% mục tiêu tuần`)])}
+VIEWS.more = () => `${pageHead("D", "list", "Thêm", "Hướng dẫn, công cụ và cài đặt.")}
   ${ilist("Công cụ", [irow('data-nav="dict"', "L", "search", "Tra từ", "Nghĩa, phiên âm, ví dụ"), irow('data-nav="notebook"', "R", "bookmark", "Sổ từ & ôn tập", `${U.words.length} từ`, dueWords().length ? `<span class="ibadge">${dueWords().length}</span>` : "")])}
   ${ilist("Khác", [irow('data-nav="guide"', "L", "help", "Hướng dẫn & cấu trúc đề thi"), irow('data-nav="settings"', "N", "gear", "Cài đặt", "Ngày thi, giọng đọc, sao lưu")])}
   <section class="igroup"><div class="ilabel">Giao diện</div><div class="ilist"><div class="irow" style="cursor:default"><span class="isq c-G">${ic("sun")}</span><span class="ibody"><span class="itx"><b>Sáng / Tối</b></span><span class="iseg" style="margin:0">${[["light", "Sáng"], ["dark", "Tối"]].map(([k, n]) => `<button class="${curTheme() === k ? "on" : ""}" data-bbt="${k}">${n}</button>`).join("")}</span></span></div></div></section>`;
