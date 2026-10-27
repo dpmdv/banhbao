@@ -7988,6 +7988,12 @@ async function khoSync() {
   } catch (e) { /* mất mạng: dùng bản đã lưu */ }
 }
 setTimeout(khoSync, 800);
+/* tự kiểm tra bài mới: khi quay lại web (mở lại iPad, chuyển tab) và 10 phút một lần */
+let khoLast = Date.now();
+const khoAgain = () => { if (Date.now() - khoLast > 60000) { khoLast = Date.now(); khoSync(); } };
+document.addEventListener("visibilitychange", () => { if (!document.hidden) khoAgain(); });
+addEventListener("focus", khoAgain);
+setInterval(() => { if (!document.hidden) { khoLast = Date.now(); khoSync(); } }, 600000);
 
 /* ================== HỘP CHẤM BÀI ==================
    Bài Writing được gửi vào kho chung của trang (collection "subs").
