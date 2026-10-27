@@ -781,6 +781,17 @@ html.app-ui .content{padding-top:max(18px, env(safe-area-inset-top, 0px))}
 .inback{display:inline-flex;align-items:center;gap:2px;color:var(--inv);font-size:16px;font-weight:500;padding:4px 8px 4px 0;margin:0 0 -16px -6px;align-self:flex-start}
 .inback svg{width:22px;height:22px;stroke-width:2.4}
 
+/* thu gọn thanh bên */
+.sidetog{margin-left:auto;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:var(--inv)}
+.sidetog:hover{background:var(--chip)}
+.sidetog svg,.sidefab svg{width:22px;height:22px}
+.ibrand b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sidefab{display:none}
+html.side-off .app{grid-template-columns:minmax(0,1fr)!important}
+html.side-off .side{display:none!important}
+html.side-off .sidefab{display:grid;place-items:center;position:fixed;z-index:20;top:max(16px, env(safe-area-inset-top, 0px));left:max(14px, env(safe-area-inset-left, 0px));width:40px;height:40px;border-radius:12px;background:var(--surface);color:var(--inv);box-shadow:0 2px 10px rgba(0,0,0,.12);border:.5px solid var(--line2)}
+html.side-off .content{padding-left:max(68px, env(safe-area-inset-left, 0px))}
+
 </style>
 </head>
 <body>
@@ -7782,7 +7793,13 @@ function applyUI() {
   const r = document.documentElement;
   r.classList.toggle("app-ui", appUI());
   r.classList.toggle("tabmode", tabMode());
+  r.classList.toggle("side-off", appUI() && !tabMode() && !!U.sideOff);
+  if (!$("#sideFab")) { const f = document.createElement("button"); f.id = "sideFab"; f.className = "sidefab"; f.title = "Mở thanh bên"; f.dataset.sidetog = "1"; f.innerHTML = ic("side"); document.body.appendChild(f); }
 }
+document.addEventListener("click", e => {
+  if (!e.target.closest("[data-sidetog]")) return;
+  U.sideOff = !U.sideOff; save(); applyUI();
+});
 const TABS = [["home", "Hôm nay", "home"], ["practice", "Luyện tập", "spark"], ["vocab", "Từ vựng", "layers"], ["mock", "Thi thử", "trophy"], ["more", "Thêm", "list"]];
 const TAB_OF = { home: "home", practice: "practice", listening: "practice", reading: "practice", writing: "practice", speaking: "practice", grammar: "practice", vocab: "vocab", dict: "vocab", notebook: "vocab", mock: "mock", band: "mock", more: "more", plan: "more", guide: "more", settings: "more" };
 const VIEW_TITLE = { home: "Hôm nay", practice: "Luyện tập", listening: "Listening", reading: "Reading", writing: "Writing", speaking: "Speaking", grammar: "Ngữ pháp", vocab: "Từ vựng", dict: "Tra từ", notebook: "Sổ từ", mock: "Thi thử", band: "Thi thử", more: "Thêm", plan: "Lộ trình", guide: "Hướng dẫn", settings: "Cài đặt" };
@@ -7811,7 +7828,7 @@ renderSide = function () {
   if (!appUI()) return _renderSide();
   const cur = TAB_OF[R.view] === "more" || TAB_OF[R.view] === "practice" ? R.view : R.view;
   $("#side").innerHTML = `<div class="iside">
-    <div class="ibrand"><span class="logo">${bbMascot("happy")}</span><b>${esc(U.name)}</b></div>
+    <div class="ibrand"><span class="logo">${bbMascot("happy")}</span><b>${esc(U.name)}</b><button class="sidetog" data-sidetog="1" title="Thu gọn thanh bên">${ic("side")}</button></div>
     <button class="isearch" data-nav="dict">${ic("search")}<span>Tra từ</span></button>
     <div class="iscroll">
     ${NAV.map(([lab, items]) => `<div class="ilabel">${lab}</div>${items.filter(x => x[0] !== "dict").map(([k, n, i, c]) => { const b = navBadge(k); return `<button class="srow ${cur === k || (k === "mock" && cur === "band") ? "on" : ""}" data-nav="${k}">${isq(c, i)}<span>${n}</span>${b ? `<span class="ibadge">${b}</span>` : ""}</button>`; }).join("")}`).join("")}
